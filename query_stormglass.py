@@ -43,6 +43,12 @@ def query_api():
     logger.info('data collected from stormglass')
     
     json_data = response.json()
+    if os.path.exists("stormglass_data.json"):
+      os.remove("stormglass_data.json")
+
+    with open("stormglass_data.json", 'w') as f:
+      json.dump(json_data, f)
+
   except requests.exceptions.HTTPError as errh:
     logger.error("HTTP Error")
     logger.error(errh.args[0])
@@ -52,6 +58,8 @@ def query_api():
     logger.error("Connection error")
   except requests.exceptions.RequestException as errex:
     logger.error("Exception request")
+
+
 
   logger.info('cleaning data and creating dataframe')
   #Create dataframe with the results of our query

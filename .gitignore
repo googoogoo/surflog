@@ -25,6 +25,7 @@
 *.log
 *.sql
 *.sqlite
+*.json
 
 # OS generated files #
 ######################
@@ -35,3 +36,11 @@
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# Directories #
+###############
+venv
+__pycache__
+elasticsearch-data
+mysql
+.vscode

@@ -21,7 +21,7 @@ def insert_elastic(df):
     logger.info('connecting to elasticsearch')
     es = Elasticsearch("http://admin_admin@localhost:9200")
 
-    if not es.indices.create(es, "surflog"):
+    if not es.indices.exists(index="surflog"):
         mappings = {
             "properties": {
                 "time": {"type": "date"},
@@ -34,9 +34,6 @@ def insert_elastic(df):
         }
 
         es.indices.create(index="surflog", mappings=mappings)
-    else:
-        pass
-
 
     metrics = ['swellHeight', 'swellDirection', 'swellPeriod', 'waveDirection', 'waveHeight']
     list_metrics = []

@@ -24,6 +24,8 @@ def insert_mysql(df):
     except exc.SQLAlchemyError:
         logger.info('failed connecting to mysql')
 
+    
+
 
     metrics = ['swellHeight', 'swellDirection', 'swellPeriod', 'waveDirection', 'waveHeight']
     list_metrics = []
