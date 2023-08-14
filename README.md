@@ -18,4 +18,6 @@ python query_stormglass.py
 ```
 
 ### Explore
-In your browser, access localhost:3000 to access Grafana. Login with user: admin y password: secret. Browse the configured Dashboards or a new one.
+* In your browser, type *localhost:3000* to access Grafana.
+* Login with *user: admin* and *password: secret*.
+* Browse the configured Dashboards or a new one.
