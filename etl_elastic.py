@@ -19,91 +19,49 @@ logger.addHandler(stream_handler)
 
 def insert_elastic(df):
     logger.info('connecting to elasticsearch')
-    es = Elasticsearch("http://admin_admin@localhost:9200")
+    es = Elasticsearch("http://localhost:9200")
 
     if not es.indices.exists(index="surflog"):
+        logger.info('creating index')
         mappings = {
             "properties": {
                 "time": {"type": "date"},
-                "dwd": {"type": "float"},
+                "metric": {"type": "text"},
                 "icon": {"type": "float"},
                 "meteo": {"type": "float"},
                 "noaa": {"type": "float"},
                 "sg": {"type": "float"}
             }
         }
-
         es.indices.create(index="surflog", mappings=mappings)
 
-    metrics = ['swellHeight', 'swellDirection', 'swellPeriod', 'waveDirection', 'waveHeight']
-    list_metrics = []
-
     logger.info('creating dataframes')
-
+    metrics = ['swellHeight','swellDirection','swellPeriod','waveHeight','waveDirection','waveDirection']
+    df_list = []
     for metric in metrics:
-        time = []
-        dwd = []
-        icon = []
-        meteo = []
-        noaa = []
-        sg = []
+        df_name = 'df' + str(metric)
+        df_name = df[['time', metric]].copy()
+        df_name['metric'] = str(metric)
+        df_temp = pd.DataFrame(df_name[metric].to_list())
+        df_name = pd.concat([df_name, df_temp], axis='columns')
+        df_name = df_name[['time', 'metric', 'icon', 'meteo', 'noaa', 'sg']].copy()
+        df_name.fillna(0, inplace=True)
+        df_list.append(df_name)
 
-        for hour in df['time']:
-            time.append(hour)
-
-        for hour in df[metric]:
-            if 'dwd' in hour:
-                dwd.append(hour['dwd'])
-            else:
-                dwd.append(0)
-            if 'icon'in hour:
-                icon.append(hour['icon'])
-            else:
-                icon.append(0)
-            if 'meteo'in hour:
-                meteo.append(hour['meteo'])
-            else:
-                meteo.append(0)
-            if 'noaa'in hour:
-                noaa.append(hour['noaa'])
-            else:
-                noaa.append(0)
-            if 'sg'in hour:
-                sg.append(hour['sg'])
-            else:
-                sg.append(0)
-
-        name_metric= 'df_'+ metric
-        
-        df_metric = pd.DataFrame()
-        
-        df_metric['time'] = time
-        df_metric['time'] = pd.to_datetime(df['time'])
-        
-        df_metric['dwd'] = dwd
-        df_metric['icon'] = icon
-        df_metric['meteo'] = meteo
-        df_metric['noaa'] = noaa
-        df_metric['sg'] = sg
-
-        dic_metric = dict()
-        dic_metric[name_metric] = df_metric
-
-        list_metrics.append(dic_metric)
+    dfmetrics = pd.concat(df_list)
+    dfmetrics.reset_index(drop=True, inplace=True)
 
     logger.info('sending data to elasticsearch')
-    for index in range(len(list_metrics)):
-        for key in list_metrics[index]:
-            for i, row in list_metrics[index][key].iterrows():
-                doc = {
-                    "time": row["time"],
-                    "dwd": row["dwd"],
-                    "icon": row["icon"],
-                    "meteo": row["meteo"],
-                    "noaa": row["noaa"],
-                    "sg": row["sg"]
-                }
-                es.index(index="surflog", id=i, document=doc)
+    for i, row in dfmetrics.iterrows():
+        doc = {
+            "time": row["time"],
+            "metric": row["metric"],
+            "icon": row["icon"],
+            "meteo": row["meteo"],
+            "noaa": row["noaa"],
+            "sg": row["sg"]
+        }
+        es.index(index="surflog", id=i, document=doc)
 
     logger.info('data stored in elasticsearch')
 

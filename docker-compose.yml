@@ -3,7 +3,7 @@ version: "3.0"
 services:
 
   grafana:
-    image: grafana/grafana:8.5.2
+    image: grafana/grafana:10.0.3
     environment:
       GF_SERVER_ROOT_URL: http://192.168.99.100:5000
       GF_LOG_LEVEL: debug
@@ -45,7 +45,7 @@ services:
 
   elasticsearch:
     container_name: elasticsearch
-    image: elasticsearch:7.14.0
+    image: elasticsearch:8.8.1
     environment:
       xpack.security.enabled: 'false'
       discovery.type: 'single-node'

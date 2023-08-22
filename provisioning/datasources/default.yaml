@@ -17,13 +17,14 @@ datasources:
       uid: surflog_elastic
       database: "surflog"
       editable: true
-      basicAuth: true
-      basicAuthUser: admin
-      url: localhost:9200
+      basicAuth: false
+      #basicAuthUser: admin
+      url: http://elasticsearch:9200
       jsonData:
         tlsSkipVerify: true
         timeField: "time"
-        esVersion: 8.0.0
+        #esVersion: 7.14.0
+        esVersion: 8.0+
         max_concurrent_shard_requests: 5
-      secureJsonData:
-        basicAuthPassword: "admin"
+      #secureJsonData:
+      #  basicAuthPassword: "admin"
