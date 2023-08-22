@@ -51,4 +51,4 @@ The program runs once every 24 hours. To stop the program, press Ctrl + C.
 ### Explore data
 * In your browser, type *localhost:3000* to access Grafana.
 * Login with *user: admin* and *password: secret*.
-* Browse the existing Dashboard or build a new one with existing datasource.
+* Browse the existing Dashboard or build a new one with existing datasources.
