@@ -19,7 +19,7 @@ logger.addHandler(stream_handler)
 
 def insert_elastic(df):
     logger.info('connecting to elasticsearch')
-    es = Elasticsearch("http://localhost:9200")
+    es = Elasticsearch("http://admin_admin@localhost:9200")
 
     if not es.indices.exists(index="surflog"):
         logger.info('creating index')

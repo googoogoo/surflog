@@ -28,21 +28,22 @@ python query_stormglass.py
 ```
 #### Expected output
 ```console
-2023-08-15 16:35:43,653 - __main__ - INFO - requesting data from stormglass
-2023-08-15 16:35:44,725 - __main__ - INFO - data collected from stormglass
-2023-08-15 16:35:44,768 - __main__ - INFO - cleaning data and creating dataframe
-2023-08-15 16:35:44,774 - etl_mysql - INFO - connecting to mysql
-2023-08-15 16:35:44,891 - etl_mysql - INFO - creating dataframes
-2023-08-15 16:35:44,901 - etl_mysql - INFO - sending data to mysql
-2023-08-15 16:35:45,260 - etl_mysql - INFO - sending data to mysql
-2023-08-15 16:35:45,447 - etl_mysql - INFO - sending data to mysql
-2023-08-15 16:35:45,651 - etl_mysql - INFO - sending data to mysql
-2023-08-15 16:35:45,997 - etl_mysql - INFO - sending data to mysql
-2023-08-15 16:35:47,002 - etl_mysql - INFO - data stored in mysql
-2023-08-15 16:35:47,002 - etl_elastic - INFO - connecting to elasticsearch
-2023-08-15 16:35:47,004 - etl_elastic - INFO - creating dataframes
-2023-08-15 16:35:47,038 - etl_elastic - INFO - sending data to elasticsearch
-2023-08-15 16:36:01,670 - etl_elastic - INFO - data stored in elasticsearch
+2023-08-22 19:27:00,568 - __main__ - INFO - requesting data from stormglass
+2023-08-22 19:27:14,301 - __main__ - INFO - data collected from stormglass
+2023-08-22 19:27:14,452 - __main__ - INFO - cleaning data and creating dataframe
+2023-08-22 19:27:14,540 - etl_mysql - INFO - connecting to mysql
+2023-08-22 19:27:14,837 - etl_mysql - INFO - creating dataframes
+2023-08-22 19:27:14,942 - etl_mysql - INFO - sending data to mysql
+2023-08-22 19:27:15,861 - etl_mysql - INFO - sending data to mysql
+2023-08-22 19:27:16,142 - etl_mysql - INFO - sending data to mysql
+2023-08-22 19:27:16,604 - etl_mysql - INFO - sending data to mysql
+2023-08-22 19:27:17,080 - etl_mysql - INFO - sending data to mysql
+2023-08-22 19:27:17,815 - etl_mysql - INFO - data stored in mysql
+2023-08-22 19:27:17,816 - etl_elastic - INFO - connecting to elasticsearch
+2023-08-22 19:27:18,043 - etl_elastic - INFO - creating index
+2023-08-22 19:27:20,238 - etl_elastic - INFO - creating dataframes
+2023-08-22 19:27:20,296 - etl_elastic - INFO - sending data to elasticsearch
+2023-08-22 19:27:54,995 - etl_elastic - INFO - data stored in elasticsearch
 ```
 #### Program execution
 The program runs once every 24 hours. To stop the program, press Ctrl + C.
